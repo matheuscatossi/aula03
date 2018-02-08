@@ -35,7 +35,9 @@ public class ContatoDaoArquivo implements IContatoDao {
 		return result;
 	}
 
-	public void gravar(List<Contato> contatos) {
+	public boolean gravar(List<Contato> contatos) {
+		boolean result = false;
+		
 		try {
 			PrintWriter pw = new PrintWriter(nomeArquivo);
 			for (Contato c : contatos) {
@@ -43,9 +45,13 @@ public class ContatoDaoArquivo implements IContatoDao {
 			}
 			pw.flush();
 			pw.close();
+			result = true;
 		} catch (FileNotFoundException e) {
 			System.out.println("Arquivo nao encontrado!");
+			return result;
 		}
+		
+		return result;
 	}
 
 	@Override
